@@ -16,9 +16,12 @@ namespace ModulSchool.Services
         {
             using (var connection = new NpgsqlConnection(ConnectionString))
             {
+
                 return await connection.QuerySingleAsync<User>(
+
                     "SELECT * FROM Users WHERE Id = @id", new { id });
             }
+
         }
     }
 }
