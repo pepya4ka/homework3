@@ -12,6 +12,11 @@ namespace ModulSchool.Services
         private const string ConnectionString =
             "host=localhost;port=5432;database=postgres;username=postgres;password=1";
 
+        public Task AppendUser(object user)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<User> GetById(Guid id)
         {
             using (var connection = new NpgsqlConnection(ConnectionString))

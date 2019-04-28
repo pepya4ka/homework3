@@ -24,5 +24,14 @@ namespace homework3.Controllers
         {
             return _getUsersInfoRequestHandler.Handle(id);
         }
+
+        [HttpPost("append")]
+        public Task<User> AppendUser(User user)//[FromBody]
+        {
+            Guid guid = Guid.NewGuid();
+            user.Id = guid;
+
+            return Task.FromResult<User>(user);
+        }
     }
 }
