@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Dapper;
 using ModulSchool.Models;
 using ModulSchool.Services.Interfaces;
 using Npgsql;
-//using Dapper;
 
 namespace ModulSchool.Services
 {
@@ -14,15 +14,11 @@ namespace ModulSchool.Services
 
         public async Task<User> GetById(Guid id)
         {
-            User user = new User
+            using (var connection = new NpgsqlConnection(ConnectionString))
             {
-                Email = "test@test.ru",
-                Id = id,
-                Nickname = "test",
-                Phone = "+7 987 654 32 10"
-            };
-
-            return await Task.FromResult<User>(user);
+                return await connection.QuerySingleAsync<User>(
+                    "SELECT * FROM Users WHERE Id = @id", new { id });
+            }
         }
     }
 }
